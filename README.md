@@ -1,2 +1,3 @@
-# home_data_kaggle
-predictions made on Kaggle's Housing Price competition
+Predictions made on Kaggle's Housing Price competition
+Details can be found here - https://www.kaggle.com/c/home-data-for-ml-course/overview
+At time of creation of this repository, best performing model's score is in top 12% 
