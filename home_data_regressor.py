@@ -122,6 +122,10 @@ def regression(X_train, X_test, X_valid, y_train, choice):
         _, best_param = grid_search(parameters, SVR(), 'neg_mean_squared_error', X_train, y_train)
         regressor = SVR(kernel = best_param['kernel'], C = best_param['C'], gamma = best_param['gamma'])
 
+    elif choice == 6:
+        
+    
+    
     else:
         from xgboost import XGBRegressor
         parameters = [{'n_estimators':[500, 1000, 2000, 4000], 'learning_rate':[0.005, 0.01, 0.05, 1]}]
