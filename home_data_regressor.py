@@ -123,8 +123,10 @@ def regression(X_train, X_test, X_valid, y_train, choice):
         regressor = SVR(kernel = best_param['kernel'], C = best_param['C'], gamma = best_param['gamma'])
 
     elif choice == 6:
-        
-    
+        from lightgbm.sklearn import LGBMRegressor
+        parameters = [{'n_estimators':[100, 500, 1000, 2000, 4000], 'learning_rate':[0.01, 0.05, 0.1, 1], 'boosting':['gbdt','dart','goss'], 'metric':['rmse', 'l2']}]
+        _, best_param = grid_search(parameters, LGBMRegressor(), 'neg_mean_squared_error', X_train, y_train)
+        regressor = LGBMRegressor(boosting_type = best_param['boosting'], learning_rate = best_param['learning_rate'], metric = best_param['metric']) 
     
     else:
         from xgboost import XGBRegressor
@@ -147,7 +149,7 @@ def pred_quality(y_pred, y_test):
     
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.01 if X.shape[0]<=100000 else 10000)
-y_pred, regressor, X_valid = regression(X_train, X_test, X_valid, y_train, choice = 4)
+y_pred, regressor, X_valid = regression(X_train, X_test, X_valid, y_train, choice = 6)
 rmse, mae = pred_quality(y_pred, y_test)
 print(mae)
       
